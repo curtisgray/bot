@@ -9,12 +9,11 @@ Chatbot UI is an open source chat UI for AI models.
 
 ## Updates
 
-Chatbot UI will be updated over time.
-
-Expect frequent improvements.
+The Bot will be updated over time. Expect frequent improvements.
 
 **Next up:**
 
+- [X] Add GPT-3.5 Turbo 16K
 - [X] Duplicate existing conversations
 - [ ] Change conversation AI model
 - [ ] Extend conversation beyond original context
