@@ -15,8 +15,9 @@ Expect frequent improvements.
 
 **Next up:**
 
-- [ ] Sharing
-- [ ] "Bots"
+- [X] Duplicate existing conversations
+- [ ] Change conversation AI model
+- [ ] Extend conversation beyond original context
 
 ## Deploy
 
@@ -46,7 +47,7 @@ docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 ghcr.io/mckaywrigley/chatbot-
 **1. Clone Repo**
 
 ```bash
-git clone https://github.com/mckaywrigley/chatbot-ui.git
+git clone https://github.com/curtisgray/bot.git
 ```
 
 **2. Install Dependencies**
@@ -101,6 +102,6 @@ If you don't have an OpenAI API key, you can get one [here](https://platform.ope
 
 ## Contact
 
-If you have any questions, feel free to reach out to Mckay on [Twitter](https://twitter.com/electric_curtis).
+If you have any questions, feel free to reach out to Electric Curtis on [Twitter](https://twitter.com/electric_curtis).
 
 [GCSE]: https://developers.google.com/custom-search/v1/overview
