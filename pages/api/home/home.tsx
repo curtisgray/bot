@@ -225,13 +225,37 @@ const Home = ({
     dispatch({ field: 'conversations', value: all });
   };
 
+  const handleDuplicateConversation = (
+    conversation: Conversation
+  ) => {
+    const conversationCopy: Conversation = {
+      id: uuidv4(),
+      name: `${conversation.name} (copy)`,
+      messages: conversation.messages,
+      model: conversation.model,
+      prompt: conversation.prompt,
+      temperature: conversation.temperature,
+      folderId: conversation.folderId,
+    };
+
+    const updatedConversations = [...conversations, conversationCopy];
+
+    dispatch({ field: 'selectedConversation', value: conversationCopy });
+    dispatch({ field: 'conversations', value: updatedConversations });
+
+    saveConversation(conversationCopy);
+    saveConversations(updatedConversations);
+
+    dispatch({ field: 'loading', value: false });
+  };
+
   // EFFECTS  --------------------------------------------
 
   useEffect(() => {
     if (window.innerWidth < 640) {
       dispatch({ field: 'showChatbar', value: false });
     }
-  }, [selectedConversation]);
+  }, [dispatch, selectedConversation]);
 
   useEffect(() => {
     defaultModelId &&
@@ -246,7 +270,7 @@ const Home = ({
         field: 'serverSidePluginKeysSet',
         value: serverSidePluginKeysSet,
       });
-  }, [defaultModelId, serverSideApiKeyIsSet, serverSidePluginKeysSet]);
+  }, [defaultModelId, dispatch, serverSideApiKeyIsSet, serverSidePluginKeysSet]);
 
   // ON LOAD --------------------------------------------
 
@@ -340,12 +364,7 @@ const Home = ({
         },
       });
     }
-  }, [
-    defaultModelId,
-    dispatch,
-    serverSideApiKeyIsSet,
-    serverSidePluginKeysSet,
-  ]);
+  }, [conversations, defaultModelId, dispatch, serverSideApiKeyIsSet, serverSidePluginKeysSet, t]);
 
   return (
     <HomeContext.Provider
@@ -357,6 +376,7 @@ const Home = ({
         handleUpdateFolder,
         handleSelectConversation,
         handleUpdateConversation,
+        handleDuplicateConversation
       }}
     >
       <Head>

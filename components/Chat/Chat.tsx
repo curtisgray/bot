@@ -72,6 +72,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
       if (selectedConversation) {
         let updatedConversation: Conversation;
+
+        // TODO: Use techniques to reduce the context length, such as summarizing the first x messages, reducing them to a single message, etc.
+        //       `selectedConversation.messages` is the entire conversation history. We can gather the first x messages and summarize them
+        //       into a single message using a summarization model such as ada
+
         if (deleteCount) {
           const updatedMessages = [...selectedConversation.messages];
           for (let i = 0; i < deleteCount; i++) {

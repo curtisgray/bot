@@ -87,7 +87,7 @@ export const ChatInput = ({
     updatePromptListVisibility(value);
   };
 
-  const handleSend = () => {
+  const handleSendInput = () => {
     if (messageIsStreaming) {
       return;
     }
@@ -164,7 +164,7 @@ export const ChatInput = ({
       }
     } else if (e.key === 'Enter' && !isTyping && !isMobile() && !e.shiftKey) {
       e.preventDefault();
-      handleSend();
+      handleSendInput();
     } else if (e.key === '/' && e.metaKey) {
       e.preventDefault();
       setShowPluginSelect(!showPluginSelect);
@@ -337,7 +337,7 @@ export const ChatInput = ({
 
           <button
             className="absolute right-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
-            onClick={handleSend}
+            onClick={handleSendInput}
           >
             {messageIsStreaming ? (
               <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-neutral-800 opacity-60 dark:border-neutral-100"></div>

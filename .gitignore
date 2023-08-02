@@ -1,5 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# local tools and test files
+.vscode
+chatbot_ui_history*.json
+tt.json
+tt.py
+tt.ts
+tt.js
+
 # dependencies
 /node_modules
 /.pnp

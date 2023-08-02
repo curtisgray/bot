@@ -4,6 +4,7 @@ import {
   IconPencil,
   IconTrash,
   IconX,
+  IconCopy
 } from '@tabler/icons-react';
 import {
   DragEvent,
@@ -30,12 +31,14 @@ export const ConversationComponent = ({ conversation }: Props) => {
     state: { selectedConversation, messageIsStreaming },
     handleSelectConversation,
     handleUpdateConversation,
+    handleDuplicateConversation,
   } = useContext(HomeContext);
 
   const { handleDeleteConversation } = useContext(ChatbarContext);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRenaming, setIsRenaming] = useState(false);
+  const [isDuplicating, setIsDuplicating] = useState(false);
   const [renameValue, setRenameValue] = useState('');
 
   const handleEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -71,15 +74,19 @@ export const ConversationComponent = ({ conversation }: Props) => {
       handleDeleteConversation(conversation);
     } else if (isRenaming) {
       handleRename(conversation);
+    } else if (isDuplicating) {
+        handleDuplicateConversation(conversation);
     }
     setIsDeleting(false);
     setIsRenaming(false);
+    setIsDuplicating(false);
   };
 
   const handleCancel: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setIsDeleting(false);
     setIsRenaming(false);
+    setIsDuplicating(false);
   };
 
   const handleOpenRenameModal: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -87,9 +94,15 @@ export const ConversationComponent = ({ conversation }: Props) => {
     setIsRenaming(true);
     selectedConversation && setRenameValue(selectedConversation.name);
   };
+
   const handleOpenDeleteModal: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
     setIsDeleting(true);
+  };
+
+  const handleDuplicateModel: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    setIsDuplicating(true);
   };
 
   useEffect(() => {
@@ -139,7 +152,7 @@ export const ConversationComponent = ({ conversation }: Props) => {
         </button>
       )}
 
-      {(isDeleting || isRenaming) &&
+      {(isDeleting || isRenaming || isDuplicating) &&
         selectedConversation?.id === conversation.id && (
           <div className="absolute right-1 z-10 flex text-gray-300">
             <SidebarActionButton handleClick={handleConfirm}>
@@ -153,13 +166,17 @@ export const ConversationComponent = ({ conversation }: Props) => {
 
       {selectedConversation?.id === conversation.id &&
         !isDeleting &&
-        !isRenaming && (
+        !isRenaming &&
+        !isDuplicating && (
           <div className="absolute right-1 z-10 flex text-gray-300">
-            <SidebarActionButton handleClick={handleOpenRenameModal}>
+            <SidebarActionButton handleClick={handleDuplicateModel} toolTipText='Duplicate conversation...'>
+              <IconCopy size={18} color='yellow' />
+            </SidebarActionButton>
+            <SidebarActionButton handleClick={handleOpenRenameModal} toolTipText='Rename conversation...'>
               <IconPencil size={18} />
             </SidebarActionButton>
-            <SidebarActionButton handleClick={handleOpenDeleteModal}>
-              <IconTrash size={18} />
+            <SidebarActionButton handleClick={handleOpenDeleteModal} toolTipText='Delete conversation...'>
+              <IconTrash size={18} color='red' />
             </SidebarActionButton>
           </div>
         )}

@@ -112,6 +112,10 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
     });
   };
 
+  const handleDuplicateConversation = () => {
+    if (!selectedConversation) return;
+  };
+  
   useEffect(() => {
     setMessageContent(message.content);
   }, [message.content]);

@@ -1,9 +1,15 @@
 version: '3.6'
 
 services:
+  # chatgpt3333:
+  #   build: .
+  #   ports:
+  #     - 3333:3000
+  #   environment:
+  #     - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
   chatgpt:
     build: .
     ports:
-      - 3000:3000
+      - 5173:3000
     environment:
-      - 'OPENAI_API_KEY='
+      - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
