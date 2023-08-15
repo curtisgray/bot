@@ -13,8 +13,12 @@ The Bot will be updated over time. Expect frequent improvements.
 
 - [X] Add GPT-3.5 Turbo 16K
 - [X] Duplicate existing conversations
+- [+] Add local Llama support
+- [+] Download Llama models locally
 - [ ] Change conversation AI model
 - [ ] Extend conversation beyond original context
+
+  X = Done  + = In progress
 
 ## Deploy
 
