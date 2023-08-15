@@ -17,10 +17,6 @@ export const ModelSelect = () => {
         dispatch: homeDispatch,
     } = useContext(HomeContext);
 
-    const hasVendor = ({ model }: { model: AIModel }): boolean => {
-        return Object.keys(Vendors).includes(model.vendor);
-    };
-
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (selectedConversation) {
             handleUpdateConversation(selectedConversation, {
@@ -58,8 +54,6 @@ export const ModelSelect = () => {
     const modelVendor = (model: AIModel | undefined) => {
         if (!model) return "";
         // check if the vendor exists in the Vendors enum
-        if (!Vendors.hasOwnProperty(model.vendor))
-            throw new Error("Invalid vendor");
         const vendor = Vendors[model.vendor];
         if (!vendor) {
             return <span>{model.vendor}</span>;
@@ -79,7 +73,6 @@ export const ModelSelect = () => {
 
     const modelDisplay = (model: AIModel | undefined) => {
         if (!model) return "";
-        // const vendor = Vendors[model.vendor];
         if (model.id === selectedConversation?.model?.id) {
             // this model is selected
             if (model.id === defaultModelId)
@@ -89,7 +82,6 @@ export const ModelSelect = () => {
             if (model.id === defaultModelId) {
                 return (
                     <span>
-                        {/* Default ({vendor.displayName}: {model.name}) */}
                         Default ({model.name})
                     </span>
                 );
@@ -111,105 +103,6 @@ export const ModelSelect = () => {
                 })),
         }));
 
-    // const reactSelectColors = {
-    //     /*
-    //      * multiValue(remove)/color:hover
-    //      */
-    //     danger: "var(--danger)",
-
-    //     /*
-    //      * multiValue(remove)/backgroundColor(focused)
-    //      * multiValue(remove)/backgroundColor:hover
-    //      */
-    //     dangerLight: "var(--danger-light)",
-
-    //     /*
-    //      * control/backgroundColor
-    //      * menu/backgroundColor
-    //      * option/color(selected)
-    //      */
-    //     neutral0: "rgb(23 23 23 / var(--tw-text-opacity))",
-
-    //     /*
-    //      * control/backgroundColor(disabled)
-    //      */
-    //     neutral5: "var(--neutral-5)",
-
-    //     /*
-    //      * control/borderColor(disabled)
-    //      * multiValue/backgroundColor
-    //      * indicators(separator)/backgroundColor(disabled)
-    //      */
-    //     neutral10: "var(--neutral-10)",
-
-    //     /*
-    //      * control/borderColor
-    //      * option/color(disabled)
-    //      * indicators/color
-    //      * indicators(separator)/backgroundColor
-    //      * indicators(loading)/color
-    //      */
-    //     neutral20: "var(--neutral-20)",
-
-    //     /*
-    //      * control/borderColor(focused)
-    //      * control/borderColor:hover
-    //      */
-    //     neutral30: "var(--neutral-30)",
-
-    //     /*
-    //      * menu(notice)/color
-    //      * singleValue/color(disabled)
-    //      * indicators/color:hover
-    //      */
-    //     neutral40: "var(--neutral-40)",
-
-    //     /*
-    //      * placeholder/color
-    //      */
-    //     neutral50: "var(--neutral-50)",
-
-    //     /*
-    //      * indicators/color(focused)
-    //      * indicators(loading)/color(focused)
-    //      */
-    //     neutral60: "var(--neutral-60)",
-
-    //     neutral70: "var(--neutral-70)",
-
-    //     /*
-    //      * input/color
-    //      * multiValue(label)/color
-    //      * singleValue/color
-    //      * indicators/color(focused)
-    //      * indicators/color:hover(focused)
-    //      */
-    //     neutral80: "var(--neutral-80)",
-
-    //     neutral90: "var(--neutral-90)",
-
-    //     /*
-    //      * control/boxShadow(focused)
-    //      * control/borderColor(focused)
-    //      * control/borderColor:hover(focused)
-    //      * option/backgroundColor(selected)
-    //      * option/backgroundColor:active(selected)
-    //      */
-    //     primary: "var(--primary)",
-
-    //     /*
-    //      * option/backgroundColor(focused)
-    //      */
-    //     primary25: "red",
-
-    //     /*
-    //      * option/backgroundColor:active
-    //      */
-    //     primary50: "var(--primary-50)",
-
-    //     primary75: "var(--primary-75)",
-    // };
-
     return (
         <div className="flex flex-col">
             <label className="mb-2 text-left text-neutral-700 dark:text-neutral-400">
@@ -219,41 +112,16 @@ export const ModelSelect = () => {
                 <Select
                     placeholder={t("Select a model") || ""}
                     options={groupedModelList}
+                    value={{
+                        value: selectedConversation?.model?.id,
+                        label: modelDisplay(selectedConversation?.model),
+                    }}
                     isSearchable={true}
                     hideSelectedOptions={true}
-                    //             value={modelOptions().filter(function(option) {
-                    //   return option.options.find(function(option) {
-                    //     return option.value === selectedConversation?.model?.id;
-                    //   });
-                    // })}
                     onChange={handleReactSelectChange}
-                    // unstyled
-                    // classNames={{
-                    //     control: () => "w-full bg-transparent p-2",
-                    // }}
-                    // theme={(theme) => ({
-                    //     ...theme,
-                    //     colors: reactSelectColors,
-                    // })}
                     className="my-react-select-container"
                     classNamePrefix="my-react-select"
                 />
-                {/* <select
-                    className="w-full bg-transparent p-2"
-                    placeholder={t("Select a model") || ""}
-                    value={selectedConversation?.model?.id || defaultModelId}
-                    onChange={handleChange}
-                >
-                    {models.map((model) => (
-                        <option
-                            key={model.id}
-                            value={model.id}
-                            className="dark:bg-[#343541] dark:text-white"
-                        >
-                            {modelDisplay(model)}
-                        </option>
-                    ))}
-                </select> */}
             </div>
             {selectedConversation?.model?.vendor ===
                 Vendors.huggingface.name && (
@@ -279,9 +147,6 @@ export const ModelSelect = () => {
                             )
                         )}
                     </select>
-                    {/* {selectedConversation?.model?.isDownloaded ? (<span className="self-center m-2">Model is downloaded</span>):
-                    (<button className="w-min self-center bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                        onClick={handleStartDownload}>{t("Download model")}</button>)} */}
                 </div>
             )}
             {selectedConversation?.model?.vendor === Vendors.openai.name && (

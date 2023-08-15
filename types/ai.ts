@@ -49,7 +49,7 @@ export const Vendors: Record<string, VendorInfo> = {
         displayName: "HuggingFace",
         logo: huggingfaceImage,
         isDownloadable: true,
-        isEnabled: false,
+        isEnabled: true,
     },
 };
 
