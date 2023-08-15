@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import HomeContext from "./home.context";
 import { HomeInitialState, initialState } from "./home.state";
 import { Chat } from "@/components/Chat/Chat";
@@ -10,7 +11,7 @@ import useApiService from "@/services/useApiService";
 import { Conversation } from "@/types/chat";
 import { KeyValuePair } from "@/types/data";
 import { FolderInterface, FolderType } from "@/types/folder";
-import { OpenAIModelID, OpenAIModels, fallbackModelID } from "@/types/openai";
+import { AIModelID, AIModels, fallbackModelID } from "@/types/ai";
 import { Prompt } from "@/types/prompt";
 import {
     cleanConversationHistory,
@@ -36,7 +37,7 @@ import { v4 as uuidv4 } from "uuid";
 interface Props {
     serverSideApiKeyIsSet: boolean;
     serverSidePluginKeysSet: boolean;
-    defaultModelId: OpenAIModelID;
+    defaultModelId: AIModelID;
 }
 
 const Home = ({
@@ -46,8 +47,6 @@ const Home = ({
 }: Props) => {
     const { t } = useTranslation("chat");
     const { getModels } = useApiService();
-    // todo: get open source models
-    // const { data: openSourceModels } = useOpenSourceService();
     const { getModelsError } = useErrorService();
     const [initialRender, setInitialRender] = useState<boolean>(true);
 
@@ -177,13 +176,13 @@ const Home = ({
 
         const newConversation: Conversation = {
             id: uuidv4(),
-            name: t("New Conversation"),
+            name: `${t('New Conversation')}`,
             messages: [],
             model: lastConversation?.model || {
-                id: OpenAIModels[defaultModelId].id,
-                name: OpenAIModels[defaultModelId].name,
-                maxLength: OpenAIModels[defaultModelId].maxLength,
-                tokenLimit: OpenAIModels[defaultModelId].tokenLimit,
+                id: AIModels[defaultModelId].id,
+                name: AIModels[defaultModelId].name,
+                maxLength: AIModels[defaultModelId].maxLength,
+                tokenLimit: AIModels[defaultModelId].tokenLimit,
             },
             prompt: DEFAULT_SYSTEM_PROMPT,
             temperature: lastConversation?.temperature ?? DEFAULT_TEMPERATURE,
@@ -247,7 +246,7 @@ const Home = ({
         if (window.innerWidth < 640) {
             dispatch({ field: "showChatbar", value: false });
         }
-    }, [dispatch, selectedConversation]);
+    }, [selectedConversation]);
 
     useEffect(() => {
         defaultModelId &&
@@ -340,9 +339,7 @@ const Home = ({
             });
         }
 
-        const selectedConversation = localStorage.getItem(
-            "selectedConversation"
-        );
+        const selectedConversation = localStorage.getItem("selectedConversation");
         if (selectedConversation) {
             const parsedSelectedConversation: Conversation =
                 JSON.parse(selectedConversation);
@@ -362,7 +359,7 @@ const Home = ({
                     id: uuidv4(),
                     name: t("New Conversation"),
                     messages: [],
-                    model: OpenAIModels[defaultModelId],
+                    model: AIModels[defaultModelId],
                     prompt: DEFAULT_SYSTEM_PROMPT,
                     temperature:
                         lastConversation?.temperature ?? DEFAULT_TEMPERATURE,
@@ -371,7 +368,6 @@ const Home = ({
             });
         }
     }, [
-        conversations,
         defaultModelId,
         dispatch,
         serverSideApiKeyIsSet,
@@ -393,8 +389,8 @@ const Home = ({
             }}
         >
             <Head>
-                <title>Chatbot UI</title>
-                <meta name="description" content="ChatGPT but better." />
+                <title>BotBot</title>
+                <meta name="description" content="The convienent chat UI." />
                 <meta
                     name="viewport"
                     content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
@@ -403,7 +399,7 @@ const Home = ({
             </Head>
             {selectedConversation && (
                 <main
-                    className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
+                    className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
                 >
                     <div className="fixed top-0 w-full sm:hidden">
                         <Navbar
@@ -431,8 +427,8 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
     const defaultModelId =
         (process.env.DEFAULT_MODEL &&
-            Object.values(OpenAIModelID).includes(
-                process.env.DEFAULT_MODEL as OpenAIModelID
+            Object.values(AIModelID).includes(
+                process.env.DEFAULT_MODEL as AIModelID
             ) &&
             process.env.DEFAULT_MODEL) ||
         fallbackModelID;

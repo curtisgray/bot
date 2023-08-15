@@ -1,5 +1,8 @@
-import { OpenAIModel, OpenAIModelID, OpenAIModels } from "@/types/openai";
-import {
+import { AIModel, AIModelID, AIModels, Vendors } from "@/types/ai";
+import
+{
+    HF_THEBLOKE_MODELS_URL,
+    HF_THEBLOKE_MODEL_URL,
     OPENAI_API_HOST,
     OPENAI_API_TYPE,
     OPENAI_API_VERSION,
@@ -10,7 +13,8 @@ export const config = {
     runtime: "edge",
 };
 
-const handler = async (req: Request): Promise<Response> => {
+const handler = async (req: Request): Promise<Response> =>
+{
     try {
         const { key } = (await req.json()) as {
             key: string;
@@ -25,17 +29,16 @@ const handler = async (req: Request): Promise<Response> => {
             headers: {
                 "Content-Type": "application/json",
                 ...(OPENAI_API_TYPE === "openai" && {
-                    Authorization: `Bearer ${
-                        key ? key : process.env.OPENAI_API_KEY
-                    }`,
+                    Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY
+                        }`,
                 }),
                 ...(OPENAI_API_TYPE === "azure" && {
                     "api-key": `${key ? key : process.env.OPENAI_API_KEY}`,
                 }),
                 ...(OPENAI_API_TYPE === "openai" &&
                     OPENAI_ORGANIZATION && {
-                        "OpenAI-Organization": OPENAI_ORGANIZATION,
-                    }),
+                    "OpenAI-Organization": OPENAI_ORGANIZATION,
+                }),
             },
         });
 
@@ -46,8 +49,7 @@ const handler = async (req: Request): Promise<Response> => {
             });
         } else if (response.status !== 200) {
             console.error(
-                `OpenAI API returned an error ${
-                    response.status
+                `OpenAI API returned an error ${response.status
                 }: ${await response.text()}`
             );
             throw new Error("OpenAI API returned an error");
@@ -55,21 +57,50 @@ const handler = async (req: Request): Promise<Response> => {
 
         const json = await response.json();
 
-        const models: OpenAIModel[] = json.data
-            .map((model: any) => {
+        const models: AIModel[] = json.data
+            .map((model: any) =>
+            {
                 const model_name =
                     OPENAI_API_TYPE === "azure" ? model.model : model.id;
-                for (const [key, value] of Object.entries(OpenAIModelID)) {
+                for (const [key, value] of Object.entries(AIModelID)) {
                     if (value === model_name) {
                         return {
                             id: model.id,
-                            name: OpenAIModels[value].name,
+                            name: AIModels[value].name,
+                            vendor: Vendors.openai.name,
+                            location: AIModels[value].location,
+                            apiKey: AIModels[value].apiKey,
                         };
                     }
                 }
             })
             .filter(Boolean);
 
+        const ores = await fetch(HF_THEBLOKE_MODELS_URL);
+        if (ores.status === 200) {
+            const oj = await ores.json();
+            const openModels: AIModel[] = oj
+                .map((model: any) =>
+                {
+                    if (model.tags.includes("llama") || model.tags.includes("llama-2")) {
+                        return {
+                            id: model.id,
+                            name: model.id.replace("-GGML", ""),
+                            vendor: Vendors.huggingface.name,
+                            location: `${HF_THEBLOKE_MODEL_URL}${model.id}`,
+                            apiKey: null,
+                            quantizations: model.siblings.map((s: any) =>
+                            {
+                                if (s.rfilename.includes(".bin")) {
+                                    const quant = s.rfilename.split(".")[s.rfilename.split(".").length - 2].substring(1);
+                                    return quant;
+                                }
+                            }).filter(Boolean)
+                        };
+                    }
+                }).filter(Boolean);
+            models.push(...openModels);
+        }
         return new Response(JSON.stringify(models), { status: 200 });
     } catch (error) {
         console.error(error);

@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: chatbot-ui
+  name: botbot
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  namespace: chatbot-ui
-  name: chatbot-ui
+  namespace: botbot
+  name: botbot
 type: Opaque
 data:
   OPENAI_API_KEY: <base64 encoded key>
@@ -15,23 +15,23 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: chatbot-ui
-  name: chatbot-ui
+  namespace: botbot
+  name: botbot
   labels:
-    app: chatbot-ui
+    app: botbot
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chatbot-ui
+      app: botbot
   template:
     metadata:
       labels:
-        app: chatbot-ui
+        app: botbot
     spec:
       containers:
-        - name: chatbot-ui
-          image: <docker user>/chatbot-ui:latest
+        - name: botbot
+          image: <docker user>/botbot:latest
           resources: {}
           ports:
             - containerPort: 3000
@@ -39,16 +39,16 @@ spec:
             - name: OPENAI_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: chatbot-ui
+                  name: botbot
                   key: OPENAI_API_KEY
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  namespace: chatbot-ui
-  name: chatbot-ui
+  namespace: botbot
+  name: botbot
   labels:
-    app: chatbot-ui
+    app: botbot
 spec:
   ports:
     - name: http
@@ -56,5 +56,5 @@ spec:
       port: 80
       targetPort: 3000
   selector:
-    app: chatbot-ui
+    app: botbot
   type: ClusterIP

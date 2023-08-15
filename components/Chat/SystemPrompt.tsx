@@ -12,6 +12,7 @@ import {
     useRef,
     useState,
 } from "react";
+// import TextAreaAutosize from "react-textarea-autosize";
 
 interface Props {
     conversation: Conversation;
@@ -163,7 +164,7 @@ export const SystemPrompt: FC<Props> = ({
             textareaRef.current.style.height = "inherit";
             textareaRef.current.style.height = `${textareaRef.current?.scrollHeight}px`;
         }
-    }, [value]);
+    }, []);
 
     useEffect(() => {
         if (conversation.prompt) {
@@ -171,7 +172,7 @@ export const SystemPrompt: FC<Props> = ({
         } else {
             setValue(DEFAULT_SYSTEM_PROMPT);
         }
-    }, [conversation]);
+    }, [conversation.prompt]);
 
     useEffect(() => {
         const handleOutsideClick = (e: MouseEvent) => {
@@ -197,14 +198,36 @@ export const SystemPrompt: FC<Props> = ({
             </label>
             <textarea
                 ref={textareaRef}
+                className="w-full rounded-lg border border-neutral-200 bg-transparent max-h-52 px-4 py-3 text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
+                placeholder={
+                    t(`Enter a prompt or type "/" to select a prompt...`) || ""
+                }
+                rows={12}
+                value={t(value) || ""}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+            />
+            {/* <TextAreaAutosize
+                ref={textareaRef}
+                className="w-full rounded-lg border border-neutral-200 bg-transparent max-h-60 px-4 py-3 text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
+                placeholder={
+                    t(`Enter a prompt or type "/" to select a prompt...`) || ""
+                }
+                rows={12}
+                value={t(value) || ""}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+            /> */}
+            {/* <textarea
+                ref={textareaRef}
                 className="w-full rounded-lg border border-neutral-200 bg-transparent px-4 py-3 text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 style={{
                     resize: "none",
                     bottom: `${textareaRef?.current?.scrollHeight}px`,
-                    maxHeight: "300px",
+                    maxHeight: "500px",
                     overflow: `${
                         textareaRef.current &&
-                        textareaRef.current.scrollHeight > 400
+                        textareaRef.current.scrollHeight > 600
                             ? "auto"
                             : "hidden"
                     }`,
@@ -216,7 +239,7 @@ export const SystemPrompt: FC<Props> = ({
                 rows={1}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-            />
+            /> */}
 
             {showPromptList && filteredPrompts.length > 0 && (
                 <div>

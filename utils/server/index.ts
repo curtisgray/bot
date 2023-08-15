@@ -6,7 +6,7 @@ import {
     OPENAI_ORGANIZATION,
 } from "../app/const";
 import { Message } from "@/types/chat";
-import { OpenAIModel } from "@/types/openai";
+import { AIModel } from "@/types/ai";
 import {
     ParsedEvent,
     ReconnectInterval,
@@ -28,7 +28,7 @@ export class OpenAIError extends Error {
 }
 
 export const OpenAIStream = async (
-    model: OpenAIModel,
+    model: AIModel,
     systemPrompt: string,
     temperature: number,
     key: string,

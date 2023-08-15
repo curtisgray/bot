@@ -241,7 +241,7 @@ export const ChatInput = ({
                 textareaRef?.current?.scrollHeight > 400 ? "auto" : "hidden"
             }`;
         }
-    }, [content]);
+    }, [content, textareaRef]);
 
     useEffect(() => {
         const handleOutsideClick = (e: MouseEvent) => {
@@ -397,11 +397,11 @@ export const ChatInput = ({
                     rel="noreferrer"
                     className="underline"
                 >
-                    ChatBot UI
+                    BotBot
                 </a>
                 .{" "}
                 {t(
-                    "Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality."
+                    "BotBot is a convienent chat UI for OpenAI and LLaMA models aiming to exceed ChatGPT's interface and functionality."
                 )}
             </div>
         </div>

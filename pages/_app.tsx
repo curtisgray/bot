@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/styles/react-select.css";
 import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";

@@ -8,7 +8,7 @@ import { useCreateReducer } from "@/hooks/useCreateReducer";
 import HomeContext from "@/pages/api/home/home.context";
 import { Conversation } from "@/types/chat";
 import { LatestExportFormat, SupportedExportFormats } from "@/types/export";
-import { OpenAIModels } from "@/types/openai";
+import { AIModels } from "@/types/ai";
 import { PluginKey } from "@/types/plugin";
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from "@/utils/app/const";
 import { saveConversation, saveConversations } from "@/utils/app/conversation";
@@ -124,7 +124,7 @@ export const Chatbar = () => {
                     id: uuidv4(),
                     name: t("New Conversation"),
                     messages: [],
-                    model: OpenAIModels[defaultModelId],
+                    model: AIModels[defaultModelId],
                     prompt: DEFAULT_SYSTEM_PROMPT,
                     temperature: DEFAULT_TEMPERATURE,
                     folderId: null,
@@ -168,7 +168,7 @@ export const Chatbar = () => {
                         id: uuidv4(),
                         name: t("New Conversation"),
                         messages: [],
-                        model: OpenAIModels[defaultModelId],
+                        model: AIModels[defaultModelId],
                         prompt: DEFAULT_SYSTEM_PROMPT,
                         temperature: DEFAULT_TEMPERATURE,
                         folderId: null,
@@ -220,7 +220,7 @@ export const Chatbar = () => {
                 value: conversations,
             });
         }
-    }, [searchTerm, conversations]);
+    }, [searchTerm, conversations, chatDispatch]);
 
     return (
         <ChatbarContext.Provider

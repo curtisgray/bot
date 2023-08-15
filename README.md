@@ -20,7 +20,7 @@ The Bot will be updated over time. Expect frequent improvements.
 
 **Vercel**
 
-Host your own live version of Chatbot UI with Vercel.
+Host your own live version of BotBot with Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcurtisgray%2Fbot)
 
@@ -29,14 +29,14 @@ Host your own live version of Chatbot UI with Vercel.
 Build locally:
 
 ```shell
-docker build -t chatgpt-ui .
-docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 chatgpt-ui
+docker build -t botbot .
+docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 botbot
 ```
 
-Pull from ghcr:
+Pull from Docker Hub:
 
 ```
-docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 ghcr.io/mckaywrigley/chatbot-ui:main
+docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 carverlab/public-cloud:botbot
 ```
 
 ## Running Locally

@@ -6,7 +6,7 @@ import { PromptbarSettings } from "./components/PromptbarSettings";
 import { Prompts } from "./components/Prompts";
 import { useCreateReducer } from "@/hooks/useCreateReducer";
 import HomeContext from "@/pages/api/home/home.context";
-import { OpenAIModels } from "@/types/openai";
+import { AIModels } from "@/types/ai";
 import { Prompt } from "@/types/prompt";
 import { savePrompts } from "@/utils/app/prompts";
 import { useContext, useEffect, useState } from "react";
@@ -43,7 +43,7 @@ const Promptbar = () => {
                 name: `Prompt ${prompts.length + 1}`,
                 description: "",
                 content: "",
-                model: OpenAIModels[defaultModelId],
+                model: AIModels[defaultModelId],
                 folderId: null,
             };
 
@@ -107,7 +107,7 @@ const Promptbar = () => {
         } else {
             promptDispatch({ field: "filteredPrompts", value: prompts });
         }
-    }, [searchTerm, prompts]);
+    }, [searchTerm, prompts, promptDispatch]);
 
     return (
         <PromptbarContext.Provider
