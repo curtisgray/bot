@@ -1,13 +1,13 @@
 # Overview
 Forked and modified from https://github.com/mckaywrigley/chatbot-ui
 
-The Bot is an open source chat interface for AI models.
+Wingman is an open source chat interface for AI models.
 
-![The Bot](./public/screenshots/screenshot-0402023.jpg)
+![Wingman](./public/screenshots/screenshot-0402023.jpg)
 
 ## Updates
 
-The Bot will be updated over time. Expect frequent improvements.
+Wingman will be updated over time. Expect frequent improvements.
 
 **Next up:**
 
@@ -22,7 +22,7 @@ The Bot will be updated over time. Expect frequent improvements.
 
 **Vercel**
 
-Host your own live version of BotBot with Vercel.
+Host your own live version of Wingman with Vercel.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fcurtisgray%2Fbot)
 
@@ -31,14 +31,14 @@ Host your own live version of BotBot with Vercel.
 Build locally:
 
 ```shell
-docker build -t botbot .
-docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 botbot
+docker build -t wingman .
+docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 wingman
 ```
 
 Pull from Docker Hub:
 
 ```
-docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 carverlab/public-cloud:botbot
+docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 carverlab/public-cloud:wingman
 ```
 
 ## Running Locally
@@ -46,7 +46,7 @@ docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 carverlab/public-cloud:botbot
 **1. Clone Repo**
 
 ```bash
-git clone https://github.com/curtisgray/bot.git
+git clone https://github.com/curtisgray/wingman.git
 ```
 
 **2. Install Dependencies**
