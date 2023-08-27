@@ -21,11 +21,10 @@ We welcome the following types of contributions:
 
 To get started, fork the project on GitHub and clone it locally on your machine. Then, create a new branch to work on your changes.
 
-```
-git clone https://github.com/curtisgray/bot.git
-cd bot
+```bash
+git clone https://github.com/curtisgray/wingman.git
+cd wingman
 git checkout -b my-branch-name
-
 ```
 
 Before submitting your pull request, please make sure your changes pass our automated tests and adhere to our code style guidelines.

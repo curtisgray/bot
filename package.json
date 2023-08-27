@@ -1,6 +1,10 @@
 {
-    "name": "ai-chatbot-starter",
-    "version": "0.1.0",
+    "name": "wingman",
+    "author": {
+        "name": "Electric Curtis",
+        "url": "https://twitter.com/electric_curtis"
+    },
+    "version": "0.2.0",
     "private": true,
     "scripts": {
         "dev": "next dev",
