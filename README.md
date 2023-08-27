@@ -2,9 +2,7 @@
 
 Forked and modified from https://github.com/mckaywrigley/chatbot-ui
 
-Wingman is an open source chat interface for AI models.
-
-![Wingman](./public/screenshots/screenshot-0402023.jpg)
+Wingman is an open source interface for AI models.
 
 ## Updates
 
@@ -14,9 +12,9 @@ Wingman will be updated over time. Expect frequent improvements.
 
 - [X] Add GPT-3.5 Turbo 16K
 - [X] Duplicate existing conversations
-- [ ] Add local Llama support
-- [ ] Download Llama models locally
-- [ ] Change conversation AI model
+- [ ] Add local Llama support (in progress)
+- [ ] Download Llama models locally (in progress)
+- [ ] Change AI model on the fly
 - [ ] Extend conversation beyond original context
 
 ## Deploy
