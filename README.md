@@ -14,8 +14,8 @@ Wingman will be updated over time. Expect frequent improvements.
 
 - [X] Add GPT-3.5 Turbo 16K
 - [X] Duplicate existing conversations
-- [ ] Add local Llama support (in progress)
-- [ ] Download Llama models locally (in progress)
+- [ ] ⏳ Add local Llama support (in progress)
+- [ ] ⏳ Download Llama models locally (in progress)
 - [ ] Change AI model on the fly
 - [ ] Extend conversation beyond original context
 
