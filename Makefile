@@ -4,6 +4,8 @@ include .env
 
 build:
 	docker build -t wingman .
+	# docker build -t carverlab/cloud:wingman .
+	# docker build -t ${DOCKER_USER}/wingman:${DOCKER_TAG} .
 
 run:
 	export $(cat .env | xargs)

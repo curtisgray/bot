@@ -4,6 +4,8 @@ Forked and modified from https://github.com/mckaywrigley/chatbot-ui
 
 Wingman is an open source interface for AI models.
 
+![Wingman](./public/screenshots/wingman.png)
+
 ## Updates
 
 Wingman will be updated over time. Expect frequent improvements.

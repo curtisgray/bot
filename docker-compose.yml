@@ -4,24 +4,22 @@ services:
   wingman3334:
     build: .
     ports:
-      - 3333:3000
+      - 3334:3000
     environment:
       - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
-  # wingman3333:
-  #   build: .
-  #   ports:
-  #     - 3333:3000
-  #   environment:
-  #     - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
-  # wingman:
-  #   build: .
-  #   ports:
-  #     - 5173:3000
-  #   environment:
-  #     - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
-  # wingman3000:
-  #   build: .
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
+    profiles:
+      - "debug"
+  wingman3335:
+    build: .
+    ports:
+      - 3335:3000
+    environment:
+      - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
+    profiles:
+      - "test"
+  wingman:
+    image: carverlab/cloud:wingman
+    ports:
+      - 3000:3000
+    environment:
+      - 'OPENAI_API_KEY=${OPENAI_API_KEY}'
