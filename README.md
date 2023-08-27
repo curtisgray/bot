@@ -47,7 +47,7 @@ docker run -e OPENAI_API_KEY=xxxxxxxx -p 3000:3000 carverlab/public-cloud:wingma
 **1. Clone Repo**
 
 ```bash
-git clone https://github.com/curtisgray/bot.git
+git clone https://github.com/curtisgray/wingman.git
 ```
 
 **2. Install Dependencies**
