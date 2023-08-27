@@ -364,14 +364,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             {!(apiKey || serverSideApiKeyIsSet) ? (
                 <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
                     <div className="text-center text-4xl font-bold text-black dark:text-white">
-                        Welcome to BotBot
+                        Welcome to Wingman
                     </div>
                     <div className="text-center text-lg text-black dark:text-white">
-                        <div className="mb-8">{`BotBot is an open source chat UI.`}</div>
+                        <div className="mb-8">{`Wingman is an open source chat UI.`}</div>
                     </div>
                     <div className="text-center text-gray-500 dark:text-gray-400">
                         <div className="mb-2">
-                            BotBot allows you to chat with OpenAI and LLaMA AI models.
+                            Wingman allows you to chat with OpenAI and LLaMA AI models.
                         </div>
                         <div className="mb-2">
                             It is <span className="italic">only</span> used to
@@ -418,7 +418,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                                                 />
                                             </div>
                                         ) : (
-                                            "BotBot"
+                                            "Wingman"
                                         )}
                                     </div>
 

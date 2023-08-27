@@ -389,7 +389,7 @@ const Home = ({
             }}
         >
             <Head>
-                <title>BotBot</title>
+                <title>Wingman</title>
                 <meta name="description" content="The convienent chat UI." />
                 <meta
                     name="viewport"

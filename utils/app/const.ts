@@ -18,5 +18,5 @@ export const OPENAI_ORGANIZATION = process.env.OPENAI_ORGANIZATION || "";
 
 export const AZURE_DEPLOYMENT_ID = process.env.AZURE_DEPLOYMENT_ID || "";
 
-export const HF_THEBLOKE_MODELS_URL = "https://huggingface.co/api/models?author=TheBloke&search=GGML&sort=lastModified&direction=-1&full=full"
-export const HF_THEBLOKE_MODEL_URL = "https://huggingface.co/TheBloke"
+export const HF_THEBLOKE_MODELS_URL = process.env.HF_THEBLOKE_MODELS_URL || "https://huggingface.co/api/models?author=TheBloke&search=GGML&sort=lastModified&direction=-1&full=full";
+export const HF_THEBLOKE_MODEL_URL = process.env.HF_THEBLOKE_MODEL_URL || "https://huggingface.co/TheBloke";

@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-**Welcome to BotBot!**
+**Welcome to Wingman!**
 
 We appreciate your interest in contributing to our project.
 

@@ -3,16 +3,16 @@ include .env
 .PHONY: all
 
 build:
-	docker build -t chatbot-ui .
+	docker build -t wingman .
 
 run:
 	export $(cat .env | xargs)
-	docker stop chatbot-ui || true && docker rm chatbot-ui || true
-	docker run --name chatbot-ui --rm -e OPENAI_API_KEY=${OPENAI_API_KEY} -p 3000:3000 chatbot-ui
+	docker stop wingman || true && docker rm wingman || true
+	docker run --name wingman --rm -e OPENAI_API_KEY=${OPENAI_API_KEY} -p 3000:3000 wingman
 
 logs:
-	docker logs -f chatbot-ui
+	docker logs -f wingman
 
 push:
-	docker tag chatbot-ui:latest ${DOCKER_USER}/chatbot-ui:${DOCKER_TAG}
-	docker push ${DOCKER_USER}/chatbot-ui:${DOCKER_TAG}
+	docker tag wingman:latest ${DOCKER_USER}/wingman:${DOCKER_TAG}
+	docker push ${DOCKER_USER}/wingman:${DOCKER_TAG}

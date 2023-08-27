@@ -3,6 +3,7 @@
 # local tools and test files
 .vscode
 chatbot_ui_history*.json
+wingman_history*.json
 tt.json
 tt.py
 tt.ts
