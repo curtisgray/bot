@@ -8,7 +8,7 @@ Wingman is an open source interface for AI models.
 
 ## Updates
 
-Wingman will be updated over time. Expect frequent improvements.
+Wingman is currently under heavy development. Expect frequent updates and breaking changes.
 
 **Next up:**
 
