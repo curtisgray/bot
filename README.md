@@ -1,6 +1,8 @@
-# Overview
+![logo](./public/images/wingman-logo-blue.jpg)
 
-Forked and modified from https://github.com/mckaywrigley/chatbot-ui
+<h2 style="text-align: center;">Wingman is under heavy development. Expect frequent updates and breaking changes.</h2>
+
+# Overview
 
 Wingman is an open source interface for AI models.
 
@@ -104,4 +106,6 @@ If you don't have an OpenAI API key, you can get one [here](https://platform.ope
 
 If you have any questions, feel free to reach out to Electric Curtis on [Twitter](https://twitter.com/electric_curtis).
 
-[GCSE]: https://developers.google.com/custom-search/v1/overview
+## Acknowledgements
+
+Wingman is forked and modified from https://github.com/mckaywrigley/chatbot-ui
