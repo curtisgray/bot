@@ -1,4 +1,4 @@
-![logo](./public/images/wingman-logo-blue.jpg)
+![logo](public/images/wingman-logo-gray.png)
 
 <h2 style="text-align: center;">Wingman is under heavy development. Expect frequent updates and breaking changes.</h2>
 
