@@ -1,3 +1,5 @@
+**WINGMAN repository has moved to: https://github.com/curtisgray/wingman**
+
 ![logo](public/images/wingman-logo-gray.png)
 
 <h2 style="text-align: center;">Wingman is under heavy development. Expect frequent updates and breaking changes.</h2>
